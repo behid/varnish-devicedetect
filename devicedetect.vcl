@@ -43,6 +43,7 @@ sub devicedetect {
 	} else {
         if (req.http.User-Agent ~ "\(compatible; Googlebot-Mobile/2.1; \+http://www.google.com/bot.html\)" ||
             (req.http.User-Agent ~ "(Android|iPhone)" && req.http.User-Agent ~ "\(compatible.?; Googlebot/2.1.?; \+http://www.google.com/bot.html") ||
+			(req.http.User-Agent ~ "(iPhone|Windows Phone)" && req.http.User-Agent ~ "BingPreview/1.0b") ||
 			(req.http.User-Agent ~ "(iPhone|Windows Phone)" && req.http.User-Agent ~ "\(compatible; bingbot/2.0; \+http://www.bing.com/bingbot.htm")) {
             set req.http.X-UA-Device = "mobile-bot"; }
 		elsif (req.http.User-Agent ~ "(?i)(ads|google|bing|msn|yandex|baidu|ro|career|seznam|twitter|duckduck|slack|)bot" ||
@@ -52,6 +53,7 @@ sub devicedetect {
 				req.http.User-Agent ~ "(?i)bingpreview" ||
 				req.http.User-Agent ~ "(?i)telegram" ||
 				req.http.User-Agent ~ "(?i)whatsapp" ||
+			req.http.User-Agent ~ "(?i)bingpreview" ||
 		    req.http.User-Agent ~ "(?i)(web)crawler") {
 			set req.http.X-UA-Device = "bot"; }
 		elsif (req.http.User-Agent ~ "(?i)ipad")        { set req.http.X-UA-Device = "tablet-ipad"; }
