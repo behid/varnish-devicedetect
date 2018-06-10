@@ -3,8 +3,8 @@ language: c
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq apt-transport-https python-docutils
-  - curl https://packagecloud.io/varnishcache/varnish41/gpgkey > /tmp/key 
-  - sudo apt-key add /tmp/key
+  - cd /tmp ; wget https://packagecloud.io/varnishcache/varnish41/gpgkey 
+  - sudo apt-key add /tmp/gpgkey
   - echo " deb https://packagecloud.io/varnishcache/varnish41/ubuntu/ precise main"| sudo tee /etc/apt/sources.list.d/varnish-cache.list
   - sudo apt-get -qq update
   - sudo apt-get install varnish
