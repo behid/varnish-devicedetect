@@ -38,16 +38,21 @@ sub devicedetect {
 		set req.http.Cookie = regsuball(req.http.Cookie, "(^|; ) *X-UA-Device-force=[^;]+;? *", "\1");
 		/* If the cookie header is now empty, or just whitespace, unset it. */
 		if (req.http.Cookie ~ "^ *$") { unset req.http.Cookie; }
+	} elsif (req.http.X-Prerender-Device == "mobile") {
+		set req.http.X-UA-Device = "mobile-iphone";
 	} else {
         if (req.http.User-Agent ~ "\(compatible; Googlebot-Mobile/2.1; \+http://www.google.com/bot.html\)" ||
             (req.http.User-Agent ~ "(Android|iPhone)" && req.http.User-Agent ~ "\(compatible.?; Googlebot/2.1.?; \+http://www.google.com/bot.html") ||
 			(req.http.User-Agent ~ "(iPhone|Windows Phone)" && req.http.User-Agent ~ "BingPreview") ||
 			(req.http.User-Agent ~ "(iPhone|Windows Phone)" && req.http.User-Agent ~ "\(compatible; bingbot/2.0; \+http://www.bing.com/bingbot.htm")) {
             set req.http.X-UA-Device = "mobile-bot"; }
-		elsif (req.http.User-Agent ~ "(?i)(ads|google|bing|msn|yandex|baidu|ro|career|seznam|)bot" ||
+		elsif (req.http.User-Agent ~ "(?i)(ads|google|bing|msn|yandex|baidu|ro|career|seznam|twitter|duckduck|slack|)bot" ||
 		    req.http.User-Agent ~ "(?i)(baidu|jike|symantec)spider" ||
 		    req.http.User-Agent ~ "(?i)scanner" ||
+			req.http.User-Agent ~ "(?i)spiderpig" ||
 			req.http.User-Agent ~ "(?i)bingpreview" ||
+			req.http.User-Agent ~ "(?i)telegram" ||
+			req.http.User-Agent ~ "(?i)whatsapp" ||
 		    req.http.User-Agent ~ "(?i)(web)crawler") {
 			set req.http.X-UA-Device = "bot"; }
 		elsif (req.http.User-Agent ~ "(?i)ipad")        { set req.http.X-UA-Device = "tablet-ipad"; }
