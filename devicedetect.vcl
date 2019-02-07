@@ -53,6 +53,7 @@ sub devicedetect {
 			req.http.User-Agent ~ "(?i)bingpreview" ||
 			req.http.User-Agent ~ "(?i)telegram" ||
 			req.http.User-Agent ~ "(?i)whatsapp" ||
+			req.http.User-Agent ~ "(?i)RULE_PHP_USER_AGENT" ||
 		    req.http.User-Agent ~ "(?i)(web)crawler") {
 			set req.http.X-UA-Device = "bot"; }
 		elsif (req.http.User-Agent ~ "(?i)ipad")        { set req.http.X-UA-Device = "tablet-ipad"; }
