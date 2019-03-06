@@ -1,4 +1,6 @@
-# Copyright (c) 2012-2014 Varnish Software AS
+#
+# Copyright (c) 2016-2018 Varnish Cache project
+# Copyright (c) 2012-2016 Varnish Software AS
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -24,7 +26,7 @@
 # detectdevice.vcl - regex based device detection for Varnish
 # https://github.com/varnishcache/varnish-devicedetect/
 #
-# Author: Lasse Karstensen <lkarsten@varnish-software.com>
+# Original author: Lasse Karstensen <lkarsten@varnish-software.com>
 
 sub devicedetect {
 	unset req.http.X-UA-Device;
@@ -48,12 +50,15 @@ sub devicedetect {
             set req.http.X-UA-Device = "mobile-bot"; }
 		elsif (req.http.User-Agent ~ "(?i)(ads|google|bing|msn|yandex|baidu|ro|career|seznam|twitter|duckduck|slack|)bot" ||
 		    req.http.User-Agent ~ "(?i)(baidu|jike|symantec)spider" ||
+		    req.http.User-Agent ~ "(?i)pingdom" ||
+		    req.http.User-Agent ~ "(?i)facebookexternalhit" ||
 		    req.http.User-Agent ~ "(?i)scanner" ||
 			req.http.User-Agent ~ "(?i)spiderpig" ||
 			req.http.User-Agent ~ "(?i)bingpreview" ||
 			req.http.User-Agent ~ "(?i)telegram" ||
 			req.http.User-Agent ~ "(?i)whatsapp" ||
 			req.http.User-Agent ~ "(?i)RULE_PHP_USER_AGENT" ||
+		    req.http.User-Agent ~ "(?i)slurp" ||
 		    req.http.User-Agent ~ "(?i)(web)crawler") {
 			set req.http.X-UA-Device = "bot"; }
 		elsif (req.http.User-Agent ~ "(?i)ipad")        { set req.http.X-UA-Device = "tablet-ipad"; }
@@ -102,8 +107,6 @@ sub devicedetect {
 		    req.http.User-Agent ~ "(?i)playstation portable" ||
 		    req.http.User-Agent ~ "(?i)portalmmm" ||
 		    req.http.User-Agent ~ "(?i)proxinet" ||
-		    req.http.User-Agent ~ "(?i)sonyericsson" ||
-		    req.http.User-Agent ~ "(?i)symbian" ||
 		    req.http.User-Agent ~ "(?i)windows\ ?ce" ||
 		    req.http.User-Agent ~ "(?i)winwap" ||
 		    req.http.User-Agent ~ "(?i)eudoraweb" ||
