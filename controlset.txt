@@ -70,3 +70,4 @@ bot	Spiderpig
 bot	Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) BingPreview/1.0b
 bot	Slackbot-LinkExpanding 1.0 (+https://api.slack.com/robots
 bot	RULE_PHP_USER_AGENT
+bot Mozilla/5.0 (compatible; Google-Structured-Data-Testing-Tool +https://search.google.com/structured-data/testing-tool)
