@@ -60,7 +60,7 @@ sub devicedetect {
 			req.http.User-Agent ~ "(?i)RULE_PHP_USER_AGENT" ||
 		    req.http.User-Agent ~ "(?i)slurp" ||
 		    req.http.User-Agent ~ "(?i)(web)crawler" ||
-			req.http.User-Agent ~ "\(compatible; Google-Structured-Data-Testing-Tool +https://search.google.com/structured-data/testing-tool\)") {
+			req.http.User-Agent ~ "\(compatible; Google-Structured-Data-Testing-Tool \+https://search.google.com/structured-data/testing-tool\)") {
 			set req.http.X-UA-Device = "bot"; }
 		elsif (req.http.User-Agent ~ "(?i)ipad")        { set req.http.X-UA-Device = "tablet-ipad"; }
 		elsif (req.http.User-Agent ~ "(?i)ip(hone|od)") { set req.http.X-UA-Device = "mobile-iphone"; }
